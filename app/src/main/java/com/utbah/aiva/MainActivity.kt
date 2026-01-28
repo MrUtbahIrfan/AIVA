@@ -15,8 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.utbah.aiva.ui.screens.HistoryScreen
 import com.utbah.aiva.ui.screens.HomeScreen
 import com.utbah.aiva.ui.screens.OnboardingScreen
+import com.utbah.aiva.ui.screens.SettingsScreen
+import com.utbah.aiva.ui.screens.SmartDevicesScreen
 import com.utbah.aiva.ui.theme.AIVATheme
 
 class MainActivity : ComponentActivity() {
@@ -58,15 +61,15 @@ fun AIVAApp() {
                         navController = navController
                     )
                 }
-//                composable("devices") {
-//                    SmartDevicesScreen(navController = navController)
-//                }
-//                composable("history") {
-//                    HistoryScreen(navController = navController)
-//                }
-//                composable("settings") {
-//                    SettingsScreen(navController = navController)
-//                }
+                composable("devices") {
+                    SmartDevicesScreen(navController = navController)
+                }
+                composable("history") {
+                    HistoryScreen(navController = navController)
+                }
+                composable("settings") {
+                    SettingsScreen(navController = navController)
+                }
             }
         }
     }
