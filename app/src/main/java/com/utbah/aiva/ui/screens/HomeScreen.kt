@@ -18,14 +18,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.utbah.aiva.ui.components.BottomNavigationBar
 import com.utbah.aiva.ui.components.VoiceOrb
 import com.utbah.aiva.ui.components.VoiceState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.utbah.aiva.ui.speech.VoiceManager
 
 data class SuggestionCard(
     val icon: ImageVector,
@@ -39,7 +39,11 @@ fun HomeScreen(
     onThemeToggle: () -> Unit,
     navController: NavController
 ) {
+
+    val context = LocalContext.current
+    val voiceManager = remember { VoiceManager(context) }
     var voiceState by remember { mutableStateOf(VoiceState.IDLE) }
+    var spokenText by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
 
     val suggestions = listOf(
@@ -128,23 +132,32 @@ fun HomeScreen(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+//                    VoiceOrb(
+//                        voiceState = voiceState,
+//                        onTap = {
+//                            if (voiceState == VoiceState.IDLE) {
+//                                scope.launch {
+//                                    voiceState = VoiceState.LISTENING
+//                                    delay(2000)
+//                                    voiceState = VoiceState.PROCESSING
+//                                    delay(1500)
+//                                    voiceState = VoiceState.SPEAKING
+//                                    delay(2000)
+//                                    voiceState = VoiceState.IDLE
+//                                }
+//                            }
+//                        }
+//                    )
+
                     VoiceOrb(
                         voiceState = voiceState,
                         onTap = {
-                            if (voiceState == VoiceState.IDLE) {
-                                scope.launch {
-                                    voiceState = VoiceState.LISTENING
-                                    delay(2000)
-                                    voiceState = VoiceState.PROCESSING
-                                    delay(1500)
-                                    voiceState = VoiceState.SPEAKING
-                                    delay(2000)
-                                    voiceState = VoiceState.IDLE
-                                }
-                            }
+                            voiceManager.startListening(
+                                callback = { spokenText = it },
+                                onState = { voiceState = it }
+                            )
                         }
                     )
-
                     Spacer(modifier = Modifier.height(32.dp))
 
                     Text(

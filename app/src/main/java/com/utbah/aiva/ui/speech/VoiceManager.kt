@@ -1,4 +1,4 @@
-package com.utbah.aiva.ui.voice
+package com.utbah.aiva.ui.speech
 
 import android.content.Context
 import android.content.Intent
