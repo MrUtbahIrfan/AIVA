@@ -26,6 +26,8 @@ import com.utbah.aiva.ui.components.BottomNavigationBar
 import com.utbah.aiva.ui.components.VoiceOrb
 import com.utbah.aiva.ui.components.VoiceState
 import com.utbah.aiva.ui.speech.VoiceManager
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 data class SuggestionCard(
     val icon: ImageVector,
