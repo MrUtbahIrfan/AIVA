@@ -18,37 +18,37 @@ class VoiceManager(private val context: Context) {
         putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
     }
 
-//    fun startListening(callback: (String) -> Unit, onState: (VoiceState) -> Unit) {
-//        recognizer.setRecognitionListener(object : RecognitionListener {
-//            override fun onReadyForSpeech(params: Bundle?) {
-//                onState(VoiceState.LISTENING)
-//            }
-//
-//            override fun onEndOfSpeech() {
-//                onState(VoiceState.PROCESSING)
-//            }
-//
-//            override fun onResults(results: Bundle?) {
-//                val text = results
-//                    ?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-//                    ?.firstOrNull() ?: ""
-//                callback(text)
-//                onState(VoiceState.SPEAKING)
-//            }
-//
-//            override fun onError(error: Int) {
-//                onState(VoiceState.IDLE)
-//            }
-//
-//            override fun onRmsChanged(rmsdB: Float) {}
-//            override fun onPartialResults(partialResults: Bundle?) {}
-//            override fun onBeginningOfSpeech() {}
-//            override fun onBufferReceived(buffer: ByteArray?) {}
-//            override fun onEvent(eventType: Int, params: Bundle?) {}
-//        })
-//
-//        recognizer.startListening(intent)
-//    }
+    fun startListening(callback: (String) -> Unit, onState: (VoiceState) -> Unit) {
+        recognizer.setRecognitionListener(object : RecognitionListener {
+            override fun onReadyForSpeech(params: Bundle?) {
+                onState(VoiceState.LISTENING)
+            }
+
+            override fun onEndOfSpeech() {
+                onState(VoiceState.PROCESSING)
+            }
+
+            override fun onResults(results: Bundle?) {
+                val text = results
+                    ?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                    ?.firstOrNull() ?: ""
+                callback(text)
+                onState(VoiceState.SPEAKING)
+            }
+
+            override fun onError(error: Int) {
+                onState(VoiceState.IDLE)
+            }
+
+            override fun onRmsChanged(rmsdB: Float) {}
+            override fun onPartialResults(partialResults: Bundle?) {}
+            override fun onBeginningOfSpeech() {}
+            override fun onBufferReceived(buffer: ByteArray?) {}
+            override fun onEvent(eventType: Int, params: Bundle?) {}
+        })
+
+        recognizer.startListening(intent)
+    }
 
     fun startListening(
         onText: (String) -> Unit,

@@ -151,15 +151,15 @@ fun HomeScreen(
                         }
                     )
 
-//                    VoiceOrb(
-//                        voiceState = voiceState,
-//                        onTap = {
-//                            voiceManager.startListening(
-//                                callback = { spokenText = it },
-//                                onState = { voiceState = it }
-//                            )
-//                        }
-//                    )
+                    VoiceOrb(
+                        voiceState = voiceState,
+                        onTap = {
+                            voiceManager.startListening(
+                                callback = { spokenText = it },
+                                onState = { voiceState = it }
+                            )
+                        }
+                    )
                     Spacer(modifier = Modifier.height(32.dp))
 
                     Text(
