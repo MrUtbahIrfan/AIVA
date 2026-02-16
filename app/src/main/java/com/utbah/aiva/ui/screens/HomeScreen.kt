@@ -132,32 +132,32 @@ fun HomeScreen(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-//                    VoiceOrb(
-//                        voiceState = voiceState,
-//                        onTap = {
-//                            if (voiceState == VoiceState.IDLE) {
-//                                scope.launch {
-//                                    voiceState = VoiceState.LISTENING
-//                                    delay(2000)
-//                                    voiceState = VoiceState.PROCESSING
-//                                    delay(1500)
-//                                    voiceState = VoiceState.SPEAKING
-//                                    delay(2000)
-//                                    voiceState = VoiceState.IDLE
-//                                }
-//                            }
-//                        }
-//                    )
-
                     VoiceOrb(
                         voiceState = voiceState,
                         onTap = {
-                            voiceManager.startListening(
-                                callback = { spokenText = it },
-                                onState = { voiceState = it }
-                            )
+                            if (voiceState == VoiceState.IDLE) {
+                                scope.launch {
+                                    voiceState = VoiceState.LISTENING
+                                    delay(2000)
+                                    voiceState = VoiceState.PROCESSING
+                                    delay(1500)
+                                    voiceState = VoiceState.SPEAKING
+                                    delay(2000)
+                                    voiceState = VoiceState.IDLE
+                                }
+                            }
                         }
                     )
+
+//                    VoiceOrb(
+//                        voiceState = voiceState,
+//                        onTap = {
+//                            voiceManager.startListening(
+//                                callback = { spokenText = it },
+//                                onState = { voiceState = it }
+//                            )
+//                        }
+//                    )
                     Spacer(modifier = Modifier.height(32.dp))
 
                     Text(
